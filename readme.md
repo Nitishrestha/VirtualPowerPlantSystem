@@ -4,7 +4,7 @@
 System for aggregating distributed power sources into
 a single cloud based energy provider.
 
-##Technologies used
+## Technologies used
 
 Language: Java
 
@@ -39,6 +39,7 @@ Then install maven dependencies used in project
 ```bash
   mvn clean install
 ```
+After successful build, a target folder will be created. To navigate to target folder:
 
 ```bash
   cd target
