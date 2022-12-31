@@ -3,6 +3,7 @@ package com.proshore.vpps.service;
 import com.proshore.vpps.dto.BatteryDTO;
 import com.proshore.vpps.dto.BatteryResponseDTO;
 import com.proshore.vpps.entity.Battery;
+import com.proshore.vpps.exceptionHandler.customException.EmptyListException;
 import com.proshore.vpps.mapper.BatteryMapper;
 import com.proshore.vpps.repository.BatteryRepository;
 import org.junit.jupiter.api.Assertions;
@@ -38,7 +39,7 @@ class BatteryServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        batteryDTO = new BatteryDTO("battery", "1000", "2000");
+        batteryDTO = new BatteryDTO("Battery", "1000", "2000");
         battery = new Battery("Battery", 12345, 2000);
     }
 
@@ -47,10 +48,10 @@ class BatteryServiceTest {
         Mockito.when(batteryMapper.mapToEntity(batteryDTO)).thenReturn(battery);
         Mockito.when(batteryRepository.save(battery)).thenReturn(battery);
         List<BatteryDTO> batteryDTOs = batteryService.addBatteries(List.of(batteryDTO));
-        BatteryDTO batteryDTO = batteryDTOs.get(0);
-        Assertions.assertEquals(batteryDTO.getName(), batteryDTO.getName());
-        Assertions.assertEquals(batteryDTO.getCapacity(), batteryDTO.getCapacity());
-        Assertions.assertEquals(batteryDTO.getPostcode(), batteryDTO.getPostcode());
+        BatteryDTO result = batteryDTOs.get(0);
+        Assertions.assertEquals(batteryDTO.getName(), result.getName());
+        Assertions.assertEquals(batteryDTO.getCapacity(), result.getCapacity());
+        Assertions.assertEquals(batteryDTO.getPostcode(), result.getPostcode());
     }
 
     @Test
@@ -67,12 +68,19 @@ class BatteryServiceTest {
     }
 
     @Test
-    void shouldReturnEmptyListWhenCapacityIsOutOfRange() {
+    void shouldReturnEmptyListWhenPostcodeIsOutOfRange() {
         Mockito.when(batteryRepository.findByPostCodeBetween(500, 1000)).thenReturn(Collections.emptyList());
         BatteryResponseDTO batteryResponseDTO = batteryService.findAllByRange(500, 1000);
         Assertions.assertEquals(0, batteryResponseDTO.getTotalCapacity());
         Assertions.assertEquals(0, batteryResponseDTO.getAverageCapacity());
         Assertions.assertEquals(0, batteryResponseDTO.getTotalBatteries());
+    }
+
+    @Test
+    void shouldThrowExceptionWhenEmptyBatteryListAdded() {
+        Assertions.assertThrows(EmptyListException.class, () -> {
+            batteryService.addBatteries(Collections.emptyList());
+        });
     }
 
 }

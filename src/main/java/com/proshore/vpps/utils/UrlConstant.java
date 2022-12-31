@@ -1,6 +1,6 @@
 package com.proshore.vpps.utils;
 
-public class UrlConstant {
+public final class UrlConstant {
 
     private UrlConstant() {
     }

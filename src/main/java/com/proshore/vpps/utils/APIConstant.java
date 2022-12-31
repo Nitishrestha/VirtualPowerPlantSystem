@@ -1,6 +1,6 @@
 package com.proshore.vpps.utils;
 
-public class APIConstant {
+public final class APIConstant {
 
     private APIConstant() {
     }

@@ -1,6 +1,6 @@
 package com.proshore.vpps.utils;
 
-public class ValidationMessageConstant {
+public final class ValidationMessageConstant {
 
     private ValidationMessageConstant() {
     }

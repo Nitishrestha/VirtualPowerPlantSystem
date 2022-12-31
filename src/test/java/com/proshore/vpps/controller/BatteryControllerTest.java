@@ -1,6 +1,5 @@
 package com.proshore.vpps.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proshore.vpps.dto.BatteryDTO;
 import com.proshore.vpps.dto.BatteryResponseDTO;
 import com.proshore.vpps.service.BatteryService;
@@ -38,7 +37,6 @@ public class BatteryControllerTest {
     private BatteryDTO batteryDto;
     private List<BatteryDTO> batteryDtos;
     private BatteryResponseDTO batteryResponseDTO;
-    private static ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     public void setup() {

@@ -4,13 +4,15 @@
 System for aggregating distributed power sources into
 a single cloud based energy provider.
 
-Technologies used
+##Technologies used
 
 Language: Java
 
 Database: MySQL
 
 Framework: Spring Boot, Spring Data JPA, Hibernate
+
+Testing Framework: Mockito, Junit, RestAssured
 
 Application for testing APIs: Postman
 
@@ -37,6 +39,11 @@ Then install maven dependencies used in project
 ```bash
   mvn clean install
 ```
+
+```bash
+  cd target
+```
+
 Start the server with available username and password of MySQL DB
 
 ```bash

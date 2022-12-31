@@ -1,6 +1,6 @@
 package com.proshore.vpps.utils;
 
-public class RegExConstant {
+public final class RegExConstant {
 
     private RegExConstant() {
     }
