@@ -48,6 +48,7 @@ public class BatteryServiceImpl implements BatteryService {
         double avgCapacity = batteryDTOs.stream().map(BatteryDTO::getCapacity).mapToDouble(Double::valueOf)
                 .average().orElse(0.0D);
         int totalCapacity = batteryDTOs.stream().map(BatteryDTO::getCapacity).mapToInt(Integer::valueOf).sum();
-        return new BatteryResponseDTO(batteryDTOs.size(), totalCapacity, avgCapacity, batteryDTOs);
+        List<String> names = batteryDTOs.stream().map(BatteryDTO::getName).collect(Collectors.toList());
+        return new BatteryResponseDTO(batteryDTOs.size(), totalCapacity, avgCapacity, names);
     }
 }

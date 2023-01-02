@@ -8,6 +8,8 @@ a single cloud based energy provider.
 
 Language: Java
 
+Java Version: 11
+
 Database: MySQL
 
 Framework: Spring Boot, Spring Data JPA, Hibernate
@@ -121,26 +123,10 @@ Start the server with available username and password of MySQL DB
     "totalBatteries": 4,
     "totalCapacity": 2202,
     "averageCapacity": 550.5,
-    "batteryDTOs": [
-        {
-            "name": "Bagot",
-            "postcode": "820",
-            "capacity": "501"
-        },
-        {
-            "name": "Bagot",
-            "postcode": "820",
-            "capacity": "501"
-        },
-        {
-            "name": "Yirrkala",
-            "postcode": "880",
-            "capacity": "600"
-        },
-        {
-            "name": "Yirrkala",
-            "postcode": "880",
-            "capacity": "600"
-        }
+    "names": [
+        "Norfolk Island",
+        "Bagot",
+        "Ootha",
+        "Yirrkala"
     ]
 }

@@ -18,6 +18,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -55,16 +56,18 @@ class BatteryServiceTest {
     }
 
     @Test
-    void shouldFindAllBatteriesWithSummary() {
+    void shouldFindAllBatteriesWithNameAndStatistics() {
         Mockito.when(batteryRepository.findByPostCodeBetween(500, 1000)).thenReturn(List.of(battery));
         Mockito.when(batteryMapper.mapToDTOs(List.of(battery))).thenReturn(List.of(batteryDTO));
         BatteryResponseDTO batteryResponseDTO = batteryService.findAllByRange(500, 1000);
         Integer totalCapacity = Stream.of(batteryDTO).map(BatteryDTO::getCapacity).mapToInt(Integer::valueOf).sum();
         Double avgCapacity = Stream.of(batteryDTO).map(BatteryDTO::getCapacity).mapToDouble(Double::valueOf)
                 .average().orElse(0.0D);
+        List<String> names = Stream.of(batteryDTO).map(BatteryDTO::getName).collect(Collectors.toList());
         Assertions.assertEquals(totalCapacity, batteryResponseDTO.getTotalCapacity());
         Assertions.assertEquals(avgCapacity, batteryResponseDTO.getAverageCapacity());
         Assertions.assertEquals(1, batteryResponseDTO.getTotalBatteries());
+        Assertions.assertEquals(names, batteryResponseDTO.getNames());
     }
 
     @Test

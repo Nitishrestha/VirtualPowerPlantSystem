@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,13 +38,15 @@ public class BatteryControllerTest {
     private BatteryDTO batteryDto;
     private List<BatteryDTO> batteryDtos;
     private BatteryResponseDTO batteryResponseDTO;
+    private List<String> names;
 
     @BeforeEach
     public void setup() {
         RestAssuredMockMvc.mockMvc(mockMvc);
         batteryDto = new BatteryDTO("battery", "12345", "2000");
         batteryDtos = List.of(batteryDto);
-        batteryResponseDTO = new BatteryResponseDTO(1, 2000, 2000D, batteryDtos);
+        names = batteryDtos.stream().map(BatteryDTO::getName).collect(Collectors.toList());
+        batteryResponseDTO = new BatteryResponseDTO(1, 2000, 2000D, names);
     }
 
     @Test
@@ -138,6 +141,6 @@ public class BatteryControllerTest {
                 .expect(jsonPath("$.totalBatteries", is(1)))
                 .expect(jsonPath("$.totalCapacity", is(2000)))
                 .expect(jsonPath("$.averageCapacity", is(2000D)))
-                .expect(jsonPath("$.batteryDTOs.size()", is(1)));
+                .expect(jsonPath("$.names", is(List.of("battery"))));
     }
 }

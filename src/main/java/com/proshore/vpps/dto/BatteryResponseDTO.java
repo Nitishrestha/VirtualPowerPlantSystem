@@ -7,16 +7,16 @@ public class BatteryResponseDTO {
     private int totalBatteries;
     private int totalCapacity;
     private Double averageCapacity;
-    private List<BatteryDTO> batteryDTOs;
+    private List<String> names;
 
     public BatteryResponseDTO() {
     }
 
-    public BatteryResponseDTO(int totalBatteries, int totalCapacity, Double averageCapacity, List<BatteryDTO> batteryDTOs) {
+    public BatteryResponseDTO(int totalBatteries, int totalCapacity, Double averageCapacity, List<String> names) {
         this.totalBatteries = totalBatteries;
         this.totalCapacity = totalCapacity;
         this.averageCapacity = averageCapacity;
-        this.batteryDTOs = batteryDTOs;
+        this.names = names;
     }
 
     public int getTotalBatteries() {
@@ -43,11 +43,8 @@ public class BatteryResponseDTO {
         this.averageCapacity = averageCapacity;
     }
 
-    public List<BatteryDTO> getBatteryDTOs() {
-        return batteryDTOs;
-    }
+    public List<String> getNames() { return names; }
 
-    public void setBatteryDTOs(List<BatteryDTO> batteryDTOs) {
-        this.batteryDTOs = batteryDTOs;
-    }
+    public void setNames(List<String> names) { this.names = names; }
+
 }
